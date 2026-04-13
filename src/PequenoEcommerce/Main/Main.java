@@ -12,15 +12,23 @@ import PequenoEcommerce.Model.Vestuario;
 import PequenoEcommerce.Service.Carrinho;
 
 public class Main {
-    public static void main(String[] args) {
+    static void main() {
         Carrinho c = new Carrinho();
 
         int opcao;
 
         do {
-            opcao = Input.lerInt("\n-- E-COMMERCE --\n1. ADICIONAR LIVRO\n2. ADICIONAR ELETRÔNICO" +
-                    "\n3. ADICIONAR VESTUÁRIO\n4. IMPRIMIR NOTA FISCAL\n5. REMOVER ITEM" +
-                    "\n0. SAIR\n\nInforme a opção que deseja: "); //IMPRIME NA TELA O MENU.
+            opcao = Input.lerInt("""
+                    
+                    -- E-COMMERCE --
+                    1. ADICIONAR LIVRO
+                    2. ADICIONAR ELETRÔNICO
+                    3. ADICIONAR VESTUÁRIO
+                    4. IMPRIMIR NOTA FISCAL
+                    5. REMOVER ITEM
+                    0. SAIR
+                    
+                    Informe a opção que deseja:\s"""); //IMPRIME NA TELA O MENU.
 
             Produto p;
             switch (opcao) { //APARTIR DA OPÇÃO SELECIONADA SOLICITA AO USUÁRIO QUE INFORME NOME, VALOR E DESCONTO.
@@ -73,9 +81,7 @@ public class Main {
                     try {
                         int idx = Integer.parseInt(leia); //FAZ A TRADUÇÃO DE STRING PARA INT, EVITANDO QUE O SCANNER DEIXEI LIXO NO BUFFERED.
                         c.removerItem(idx);
-                    } catch (CarrinhoVazioException ex) {
-                        System.err.println(ex.getMessage());
-                    } catch (PosicaoInvalidaException ex) {
+                    } catch (CarrinhoVazioException | PosicaoInvalidaException ex) {
                         System.err.println(ex.getMessage());
                     } catch (NumberFormatException ex) {
                         System.out.println("\nERRO! DIGITE APENAS NUMEROS");
