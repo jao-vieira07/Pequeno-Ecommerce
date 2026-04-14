@@ -11,12 +11,15 @@ import PequenoEcommerce.Model.Vestuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
 public class Carrinho {
     private final List<Produto> item;
+
 
     public Carrinho() {  //INICIA UMA NOVA LISTA E CARREGA OS DADOS DO ARQUIVO TXT CASO EXISTAM.
         item = new ArrayList<>();
@@ -76,9 +79,13 @@ public class Carrinho {
 
     }
 
-    public void notaFiscal() { //LÓGICA DA NOTA FISCAL
+    public void notaFiscal() {
+        //LÓGICA DA NOTA FISCAL
+        Calendar cl = Calendar.getInstance();
+        DateFormat df = DateFormat.getDateInstance();
         System.out.println("--- Nota Fiscal ---");
 
+        System.out.println("\nData da compra: " + df.format(cl.getTime()));
         for (Produto p : item) { //PERCORRE TODOS OS ITENS E IMPRIME
             System.out.printf("Produto: %s | VALOR: R$ %.2f\n", p.getNome(), p.getPreco());
         }
